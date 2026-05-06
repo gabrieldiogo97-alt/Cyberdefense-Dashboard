@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style>
+body {
+    background:black;
+    color:#00ff00;
+    font-family: monospace;
+    text-align:center;
+    margin-top:100px;
+}
+input, button {
+    background:black;
+    color:#00ff00;
+    border:1px solid #00ff00;
+    padding:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>🔐 SYSTEM LOGIN</h1>
+
+<input id="user" placeholder="username"><br><br>
+<input id="pass" type="password" placeholder="password"><br><br>
+
+<button onclick="login()">ACCESS</button>
+
+<p id="msg"></p>
+
+<div id="codeBox" style="display:none;">
+    <br>
+    <input id="code" placeholder="2FA code"><br><br>
+    <button onclick="verify()">VERIFY</button>
+</div>
+
+<script>
+function login() {
+    fetch("login.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "username=" + user.value + "&password=" + pass.value
+    })
+    .then(res => res.text())
+    .then(data => {
+
+        if (data === "2FA_REQUIRED") {
+            document.getElementById("codeBox").style.display = "block";
+            msg.innerText = "Enter 2FA code";
+        } else {
+            msg.innerText = "ACCESS DENIED";
+        }
+    });
+}
+
+function verify() {
+    fetch("verify.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "code=" + code.value
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data === "OK") {
+            window.location.href = "dashboard.php";
+        } else {
+            msg.innerText = "INVALID CODE";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

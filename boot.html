@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background:black;
+    color:#00ff00;
+    font-family:monospace;
+    padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="boot"></div>
+
+<script>
+let lines = [
+"> booting system...",
+"> loading kernel...",
+"> initializing modules...",
+"> connecting...",
+"> access granted",
+"> welcome Gabriel"
+];
+
+let i = 0;
+let boot = document.getElementById("boot");
+
+function typeLine() {
+    if (i < lines.length) {
+        let line = document.createElement("div");
+        boot.appendChild(line);
+
+        let j = 0;
+
+        let interval = setInterval(() => {
+            line.textContent += lines[i][j];
+            j++;
+
+            if (j >= lines[i].length) {
+                clearInterval(interval);
+                i++;
+                setTimeout(typeLine, 300);
+            }
+        }, 30);
+    } else {
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 1000);
+    }
+}
+
+typeLine();
+</script>
+
+</body>
+</html>
