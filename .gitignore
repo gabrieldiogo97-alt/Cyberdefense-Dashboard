@@ -11,3 +11,4 @@ failed_attempts.json
 blacklist.json
 threat_scores.json
 logs.txt
+users.db
