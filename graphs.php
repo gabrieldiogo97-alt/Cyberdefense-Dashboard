@@ -68,17 +68,38 @@ body{
     padding:20px;
 }
 
-canvas{
+
+  
+.chart-container{
+
+    width:90%;
+
+    max-width:1100px;
+
+    height:500px;
+
+    margin:auto;
+
+    margin-top:40px;
+
+    border:1px solid #00ff00;
+
+    padding:20px;
 
     background:
         rgba(0,255,0,0.05);
 
-    border:
-        1px solid #00ff00;
+    border-radius:10px;
 
-    padding:20px;
+    box-shadow:
+        0 0 20px #00ff00;
+}
 
-    margin-top:20px;
+canvas{
+
+    width:100% !important;
+
+    height:100% !important;
 }
 
 </style>
@@ -89,7 +110,11 @@ canvas{
 
 <h1>📈 REALTIME ATTACK GRAPHS</h1>
 
+<div class="chart-container">
+
 <canvas id="attackChart"></canvas>
+
+</div>
 
 <script>
 
@@ -101,6 +126,13 @@ const ctx =
 new Chart(ctx, {
 
     type:'bar',
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false
+    },
 
     data:{
 

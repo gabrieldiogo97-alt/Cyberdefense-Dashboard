@@ -2,3 +2,12 @@ logs/
 data/
 backups/
 *.zip
+
+.env
+config.php
+users.json
+sessions.json
+failed_attempts.json
+blacklist.json
+threat_scores.json
+logs.txt
